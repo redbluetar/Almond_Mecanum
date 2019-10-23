@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 //import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //import edu.wpi.first.wpilibj.*;
 
@@ -47,7 +48,11 @@ public class Robot extends TimedRobot {
         //rear_left = forward + clockwise - right;
         //rear_right = forward - clockwise + right; 
         
-        //left motors need to be reversed
+        SmartDashboard.putNumber("joystick X value:", right);
+        SmartDashboard.putNumber("joystick Y value:", -forward);
+        SmartDashboard.putNumber("joystick Z value:", clockwise);
+
+
         frontLeftMotor.set(ControlMode.PercentOutput, forward + clockwise + right);
         frontRightMotor.set(ControlMode.PercentOutput, forward - clockwise - right);
         rearLeftMotor.set(ControlMode.PercentOutput, -(forward + clockwise - right));
