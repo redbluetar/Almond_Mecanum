@@ -24,7 +24,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 public class Robot extends TimedRobot {
      //Create a robot drive object using PWMs 0, 1, 2 and 3
       TalonSRX frontLeftMotor = new TalonSRX(3);	
-		  TalonSRX rearLeftMotor = new TalonSRX(0);
+		  TalonSRX rearLeftMotor = new TalonSRX(4);
 		  TalonSRX frontRightMotor = new TalonSRX(1);	
       TalonSRX rearRightMotor = new TalonSRX(2);
       
@@ -39,6 +39,8 @@ public class Robot extends TimedRobot {
 
      public void teleopPeriodic() 
 		  {
+        //frontLeftMotor.configReverseSoftLimitEnable(true);
+
         forward = -joystick.getY();
         right = joystick.getX();
         clockwise = joystick.getZ();
@@ -46,16 +48,17 @@ public class Robot extends TimedRobot {
         //front_left = forward + clockwise + right;
         //front_right = forward - clockwise - right;
         //rear_left = forward + clockwise - right;
-        //rear_right = forward - clockwise + right; 
+        //rear_right = forward - clockwise + right;
+        
         
         SmartDashboard.putNumber("joystick X value:", right);
         SmartDashboard.putNumber("joystick Y value:", -forward);
         SmartDashboard.putNumber("joystick Z value:", clockwise);
 
 
-        frontLeftMotor.set(ControlMode.PercentOutput, forward + clockwise + right);
-        frontRightMotor.set(ControlMode.PercentOutput, forward - clockwise - right);
-        rearLeftMotor.set(ControlMode.PercentOutput, -(forward + clockwise - right));
-        rearRightMotor.set(ControlMode.PercentOutput, -(forward - clockwise + right));
+        frontLeftMotor.set(ControlMode.PercentOutput, -(forward + clockwise + right));
+        frontRightMotor.set(ControlMode.PercentOutput, -(forward - clockwise - right));
+        rearLeftMotor.set(ControlMode.PercentOutput, (forward + clockwise - right));
+        rearRightMotor.set(ControlMode.PercentOutput, (forward - clockwise + right));
       }
 }
